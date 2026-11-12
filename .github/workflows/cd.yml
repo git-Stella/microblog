@@ -13,7 +13,7 @@ jobs:
     uses: ./.github/workflows/ci.yml
     #prob don't even need to inherit anything but just in case later on it will...
     secrets: inherit
-    deploy:
+  deploy:
     runs-on: ubuntu-24.04
     permissions:
       contents: read
