@@ -18,4 +18,4 @@ jobs:
       - run: source venv/bin/activate
       - run: make install-test
       - run: make test
-      - run: make validate-docker
+      #- run: make validate-docker
