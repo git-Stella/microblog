@@ -17,6 +17,9 @@ EOF
 
 ENV FLASK_APP=microblog.py
 
+ARG APP_VERSION=unknown
+ENV APP_VERSION=${APP_VERSION}
+
 RUN <<-EOF 
     chmod +x boot.sh
     chown -R microblog:microblog ./
