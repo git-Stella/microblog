@@ -1,12 +1,22 @@
 #Continous delivery
 
-name: Continous delivery
+name: Continuous delivery
 
 on:
   push:
     tags:
+      - '**'
 
 
 jobs:
+  test:
+    uses: git-Stella/microblog/.github/workflows/ci.yml
+    with:
+      config-path: .github/labeler.yml
+    #prob don't even need to inherit anything but just in case later on it will...
+    secrets: inherit
   build:
     runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - run: make validate-docker

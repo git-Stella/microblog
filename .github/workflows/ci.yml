@@ -4,6 +4,7 @@
 name: Continous integration
 
 on:
+  workflow_call:
   push:
     branches:
 
