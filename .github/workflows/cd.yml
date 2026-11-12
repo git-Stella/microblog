@@ -36,4 +36,4 @@ jobs:
           context: .
           file: ./docker/Dockerfile_prod
           push: true
-          tags: ${{ github.event.release.tag_name }}
+          tags: v0.0.9 #${{ github.event.release.tag_name }}
