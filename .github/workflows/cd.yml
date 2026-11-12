@@ -10,7 +10,7 @@ on:
 
 jobs:
   test:
-    uses: git-Stella/microblog/.github/workflows/ci.yml
+    uses: ./.github/workflows/ci.yml
     with:
       config-path: .github/labeler.yml
     #prob don't even need to inherit anything but just in case later on it will...
