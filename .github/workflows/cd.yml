@@ -16,22 +16,24 @@ jobs:
   deploy:
     runs-on: ubuntu-24.04
     permissions:
-      contents: read
       packages: write
+      contents: read
+      attestations: write
+      id-token: write
     needs: test
     steps:
       - uses: actions/checkout@v4
 
-      - name: Logga in
+      - name: Login
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Bygg och pusha image
+      - name: Deploy image
         uses: docker/build-push-action@v5
         with:
           context: .
           file: ./docker/Dockerfile_prod
           push: true
-          tags: 0.0.9 #${{  }}
+          tags: ${{ github.event.release.tag_name }}
