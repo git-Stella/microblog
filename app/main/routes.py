@@ -8,8 +8,6 @@ from app.main.forms import EditProfileForm, PostForm
 from app.models import User, Post, utcnow
 from app.main import bp
 
-
-
 @bp.before_request
 def before_request():
     """
@@ -52,6 +50,17 @@ def explore():
     """
     posts = Post.query.order_by(Post.timestamp.desc()).all()
     return render_template('index.html', title='Explore', posts=posts)
+
+
+
+@bp.route('/version')
+def version():
+    """
+    Route for version
+    """
+    posts = Post.query.order_by(Post.timestamp.desc()).all()
+    versionConf = current_app.config.get("APP_VERSION", "unknown")
+    return render_template('version.html', title='Version', version=versionConf, posts=posts)
 
 
 

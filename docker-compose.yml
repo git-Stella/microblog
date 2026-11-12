@@ -1,0 +1,34 @@
+services:
+  microblog:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile_prod
+      args:
+        APP_VERSION: ${APP_VERSION:-unknown}
+    container_name: microblog
+    ports:
+      - "8000:5000"
+    environment:
+      SECRET_KEY: my-secret-key
+      DATABASE_URL: mysql+pymysql://microblog:andi25621@dbserver/microblog
+    depends_on:
+      - dbserver
+
+  dbserver:
+    image: mysql:5.7
+    container_name: dbserver
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: yes
+      MYSQL_DATABASE: microblog
+      MYSQL_USER: microblog
+      MYSQL_PASSWORD: andi25621
+
+  prod:
+    image: busybox
+    command: ["true"]
+    depends_on:
+      - microblog
+      - dbserver
+
+volumes:
+  dbserver:

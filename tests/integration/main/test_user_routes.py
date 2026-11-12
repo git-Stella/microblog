@@ -1,3 +1,5 @@
+import app
+
 """
 Test routes for routes for authorizing users, app/main/routes
 """
@@ -23,6 +25,27 @@ def test_user_page(client, login_user_response, user_dict, user_post_response, p
     assert b"Edit your profile" in response.data
     assert str.encode("User: " + user_dict["username"]) in response.data
     assert str.encode(post_dict["post"]) in response.data
+
+
+
+def test_version_page_default(client):
+    """
+    Test that the version route displays the default content.
+    """
+    response = client.get("/version")
+    assert response.status_code == 200
+    assert b"unknown" in response.data
+
+
+
+def test_version_page_set_value(client):
+    """
+    Test that the version route displays the set content.
+    """
+    client.application.config["APP_VERSION"] = "11.0.1"
+    response = client.get("/version")
+    assert response.status_code == 200
+    assert b"11.0.1" in response.data
 
 
 

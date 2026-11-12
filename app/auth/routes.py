@@ -8,6 +8,7 @@ from app import db
 from app.auth import bp
 from app.auth.forms import LoginForm, RegistrationForm
 from app.models import User
+from app.config import Config
 
 
 
