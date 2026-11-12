@@ -1,5 +1,3 @@
-import app
-
 """
 Test routes for routes for authorizing users, app/main/routes
 """
