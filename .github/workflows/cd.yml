@@ -1,0 +1,12 @@
+#Continous delivery
+
+name: Continous delivery
+
+on:
+  push:
+    tags:
+
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04

@@ -1,0 +1,17 @@
+#Continous integration
+#Runs make test and make validate-docker
+
+name: Continous integration
+
+on:
+  push:
+    branches:
+
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - run: make test
+      - run: make validate-docker
