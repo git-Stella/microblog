@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1.4
 FROM python:3.8-alpine
 #FROM alpine:3.24
-RUN adduser -D -u 1000 microblog
+#RUN adduser -D -u 1000 microblog
 
 WORKDIR /home/microblog
 
@@ -14,26 +14,25 @@ COPY Makefile Makefile
 COPY pytest.ini pytest.ini
 COPY .pylintrc .pylintrc
 COPY .coveragerc .coveragerc
-copy docker/test.sh
+copy docker/test.sh test.sh
 #COPY requirements requirements
-COPY requirements/test.txt microblog.py boot.sh ./
+COPY requirements/test.txt #microblog.py boot.sh ./
 
 RUN <<-EOF 
     python -m venv .venv
     .venv/bin/pip3 install -r requirements/test.txt
 EOF
 
-ENV FLASK_APP=microblog.py
+#ENV FLASK_APP=microblog.py
 
-ARG APP_VERSION="unknown"
-ENV APP_VERSION=${APP_VERSION}
+#ARG APP_VERSION="unknown"
+#ENV APP_VERSION=${APP_VERSION}
 
 RUN <<-EOF 
-    chmod +x boot.sh
-    chown -R microblog:microblog ./
+    chmod +x test.sh
 EOF
 
-USER 1000
+#USER 1000
 
-EXPOSE 5000
-ENTRYPOINT ["./boot.sh"]
+#EXPOSE 5000
+CMD ["./test.sh"]
