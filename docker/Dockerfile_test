@@ -18,8 +18,8 @@ COPY pytest.ini pytest.ini
 COPY .pylintrc .pylintrc
 COPY .coveragerc .coveragerc
 copy docker/test.sh test.sh
-COPY requirements requirements
-#COPY requirements/test.txt requirements/test.txt
+COPY requirements/prod.txt requirements/prod.txt
+COPY requirements/test.txt requirements/test.txt
 
 VOLUME ../app ../tests
 
