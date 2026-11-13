@@ -21,7 +21,7 @@ copy docker/test.sh test.sh
 COPY requirements/prod.txt requirements/prod.txt
 COPY requirements/test.txt requirements/test.txt
 
-VOLUME ../app ../tests
+# VOLUME ../app ../tests
 
 RUN <<-EOF 
     python -m venv .venv

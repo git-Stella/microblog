@@ -1,2 +1,5 @@
 #!/bin/sh
+
+. .venv/bin/activate
+
 make test
