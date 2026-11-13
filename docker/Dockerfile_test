@@ -1,0 +1,38 @@
+# syntax=docker/dockerfile:1.4
+FROM python:3.8-alpine
+#FROM alpine:3.24
+#RUN adduser -D -u 1000 microblog
+
+WORKDIR /home/microblog
+
+ENV PYTHONDONTWRITEBYTECODE 1
+
+#Container cannot be built if version is included
+# hadolint ignore=DL3018
+RUN apk --no-cache add make
+#=4.4.1-r4
+
+#COPY . .
+COPY Makefile Makefile
+COPY pytest.ini pytest.ini
+COPY .pylintrc .pylintrc
+COPY .coveragerc .coveragerc
+copy docker/test.sh test.sh
+COPY requirements/prod.txt requirements/prod.txt
+COPY requirements/test.txt requirements/test.txt
+
+# VOLUME ../app ../tests
+
+RUN <<-EOF 
+    python -m venv .venv
+    .venv/bin/pip3 install -r requirements/test.txt
+EOF
+
+RUN <<-EOF 
+    chmod +x test.sh
+EOF
+
+#USER 1000
+
+#EXPOSE 5000
+CMD ["./test.sh"]

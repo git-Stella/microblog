@@ -23,6 +23,14 @@ services:
       MYSQL_USER: microblog
       MYSQL_PASSWORD: andi25621
 
+  test:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile_test
+    volumes:
+      - ./app:/home/microblog/app
+      - ./tests:/home/microblog/tests
+
   prod:
     image: busybox
     command: ["true"]
